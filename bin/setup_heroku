@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Setup heroku application remotes
+if heroku auth:whoami &> /dev/null; then
+  if heroku apps:info --app pl-fdbk-staging &> /dev/null; then
+    git remote add staging git@heroku.com:pl-fdbk-staging.git || true
+    git config heroku.remote staging
+    echo 'You are a collaborator on the "pl-fdbk-staging" Heroku app'
+  else
+    echo 'Ask for access to the "pl-fdbk-staging" Heroku app'
+  fi
+
+  if heroku apps:info --app pl-fdbk-production &> /dev/null; then
+    git remote add production git@heroku.com:pl-fdbk-production.git || true
+    echo 'You are a collaborator on the "pl-fdbk-production" Heroku app'
+  else
+    echo 'Ask for access to the "pl-fdbk-production" Heroku app'
+  fi
+else
+  echo 'You need to login to heroku. Run "heroku login"'
+fi

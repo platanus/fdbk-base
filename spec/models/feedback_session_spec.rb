@@ -15,4 +15,18 @@ RSpec.describe FeedbackSession, type: :model do
     it { expect(feedback_session).to belong_to(:provider).class_name('User') }
     it { expect(feedback_session).to belong_to(:receiver).class_name('User') }
   end
+
+  describe 'Scopes' do
+    describe '#for_user' do
+      let(:user) { create(:user) }
+      let!(:feedback_sessions) { create_list(:feedback_session, 5) }
+      let!(:receiver_feedback_sessions) { create_list(:feedback_session, 2, receiver: user) }
+      let!(:provider_feedback_sessions) { create_list(:feedback_session, 2, provider: user) }
+      let(:user_sessions) { receiver_feedback_sessions + provider_feedback_sessions }
+
+      it 'returns feedback sessions for user' do
+        expect(described_class.for_user(user)).to match_array(user_sessions)
+      end
+    end
+  end
 end

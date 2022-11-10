@@ -2,6 +2,8 @@ class FeedbackSession < ApplicationRecord
   belongs_to :provider, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
 
+  scope :for_user, ->(user) { where(provider: user).or(where(receiver: user)) }
+
   validates :session_date, presence: true
 end
 

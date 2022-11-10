@@ -4,9 +4,14 @@ RSpec.describe 'Api::Internal::FeedbackSessionsControllers', type: :request do
   let(:user) { create(:user) }
 
   describe 'GET /index' do
-    let!(:feedback_sessions) { create_list(:feedback_session, 5) }
     let(:collection) { JSON.parse(response.body)['feedback_sessions'] }
     let(:params) { {} }
+
+    before do
+      create_list(:feedback_session, 5)
+      create_list(:feedback_session, 2, receiver: user)
+      create_list(:feedback_session, 1, provider: user)
+    end
 
     def perform
       get '/api/internal/feedback_sessions', params: params
@@ -18,7 +23,7 @@ RSpec.describe 'Api::Internal::FeedbackSessionsControllers', type: :request do
         perform
       end
 
-      it { expect(collection.count).to eq(5) }
+      it { expect(collection.count).to eq(3) }
       it { expect(response.status).to eq(200) }
     end
 

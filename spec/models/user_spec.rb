@@ -6,6 +6,28 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Validations' do
-    it { is_expected.to validate_presence_of(:name) }
+    subject(:user) { build(:user) }
+
+    it { expect(user).to validate_presence_of(:name) }
+  end
+
+  describe 'Associations' do
+    subject(:user) { build(:user) }
+
+    it do
+      expect(user).to(
+        have_many(:providers).class_name('FeedbackSession')
+                             .with_foreign_key('provider_id')
+                             .dependent(:nullify)
+      )
+    end
+
+    it do
+      expect(user).to(
+        have_many(:receivers).class_name('FeedbackSession')
+                             .with_foreign_key('receiver_id')
+                             .dependent(:nullify)
+      )
+    end
   end
 end

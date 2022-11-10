@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   namespace :api, defaults: { format: :json } do
     namespace :internal do
+      resources :feedback_sessions, only: [:index]
     end
   end
   devise_for :users

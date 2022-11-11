@@ -23,9 +23,11 @@
     <%if Rails.env.production? %>
       <%= render "shared/gtm_body" %>
     <% end %>
-
     <div id="vue-app">
-      <%= yield %>
+      <the-header></the-header>
+      <div class="container mx-auto">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

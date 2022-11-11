@@ -1,7 +1,12 @@
 /* eslint-disable no-undef */
 module.exports = {
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        base: ['"Source Sans Pro"', 'sans-serif'],
+        roboto: ['"Roboto"', 'sans-serif'],
+      },
+    },
   },
   variants: {},
   plugins: [],

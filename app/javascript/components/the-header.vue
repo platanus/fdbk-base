@@ -4,7 +4,7 @@
 <template>
   <header class="flex h-14 w-full items-center bg-indigo-700 px-4 text-white">
     <h1 class="font-roboto text-xl font-medium">
-      Nest
+      fdbk
     </h1>
     <button class="ml-auto">
       <svg

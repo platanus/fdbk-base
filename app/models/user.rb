@@ -1,8 +1,30 @@
 class User < ApplicationRecord
+  has_many(
+    :providers,
+    class_name: 'FeedbackSession',
+    foreign_key: 'provider_id',
+    dependent: :nullify,
+    inverse_of: :provider
+  )
+  has_many(
+    :receivers,
+    class_name: 'FeedbackSession',
+    foreign_key: 'receiver_id',
+    dependent: :nullify,
+    inverse_of: :receiver
+  )
+
+  validates :name, presence: true
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise(
+    :database_authenticatable,
+    :registerable,
+    :recoverable,
+    :rememberable,
+    :validatable
+  )
 end
 
 # == Schema Information
@@ -17,6 +39,7 @@ end
 #  remember_created_at    :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  name                   :string
 #
 # Indexes
 #

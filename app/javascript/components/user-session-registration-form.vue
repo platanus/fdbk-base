@@ -20,9 +20,9 @@ const emit = defineEmits<{
     class="flex flex-col"
     @submit.prevent="emit('submit', form)"
   >
-    <h2 class="mb-4 text-3xl font-normal">
+    <base-title class="mb-4">
       Crear Cuenta
-    </h2>
+    </base-title>
     <base-input
       v-model="form.name"
       label="Nombre"

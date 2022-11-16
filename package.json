@@ -8,8 +8,11 @@
     "@babel/preset-env": "7",
     "@babel/runtime": "7",
     "@fortawesome/fontawesome-free": "^6.2.0",
+    "@rails/ujs": "^7.0.4",
+    "@tailwindcss/forms": "^0.5.3",
     "@types/humps": "^2.0.2",
     "@types/node": "^18.11.9",
+    "@types/rails__ujs": "^6.0.1",
     "@types/tailwindcss": "^3.1.0",
     "activeadmin_addons": "^1.0.0",
     "arctic_admin": "^4.0.2",
@@ -20,7 +23,7 @@
     "compression-webpack-plugin": "9",
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.2.2",
-    "eslint-plugin-tailwindcss": "^3.6.2",
+    "eslint-plugin-tailwindcss": "^3.7.0",
     "fork-ts-checker-webpack-plugin": "^7.2.13",
     "humps": "^2.0.1",
     "mini-css-extract-plugin": "^2.6.1",
@@ -76,7 +79,7 @@
     "node": "14.x"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
     "test:changes": "jest --changedSince=master"
   },

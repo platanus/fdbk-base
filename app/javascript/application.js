@@ -1,4 +1,6 @@
 import { createApp } from 'vue';
+import InlineSvg from 'vue-inline-svg';
+
 import TheHeader from './components/the-header.vue';
 import BaseInput from './components/base-input.vue';
 import BaseButton from './components/base-button.vue';
@@ -13,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
       UserSession,
     },
   });
+
+  app.component('InlineSvg', InlineSvg);
+
   app.component('BaseInput', BaseInput);
   app.component('BaseButton', BaseButton);
   app.component('BaseCheckbox', BaseCheckbox);

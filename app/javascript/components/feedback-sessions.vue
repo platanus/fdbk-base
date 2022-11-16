@@ -20,13 +20,21 @@ const tabClasses = {
 };
 
 const loading = ref(false);
+const error = ref(false);
 
 async function switchType(type: 'provider' | 'receiver') {
-  currentType.value = type;
-  loading.value = true;
-  const res = await api.index(type);
-  sessions.value = res.data.feedbackSessions;
-  loading.value = false;
+  try {
+    error.value = false;
+    sessions.value = [];
+    currentType.value = type;
+    loading.value = true;
+    const res = await api.index(type);
+    sessions.value = res.data.feedbackSessions;
+  } catch (e) {
+    error.value = true;
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 
@@ -48,7 +56,16 @@ async function switchType(type: 'provider' | 'receiver') {
         Me entregan feedback
       </button>
     </div>
-    <div class="bg-slate-100 px-3 py-5">
+    <p
+      v-if="error"
+      class="py-4 text-red-400"
+    >
+      Hubo un error al cargar, por favor inténtalo nuevamente.
+    </p>
+    <div
+      v-if="sessions.length > 0"
+      class="bg-slate-100 px-3 py-5"
+    >
       <div
         v-if="loading"
         class="flex h-12 animate-pulse items-center justify-center bg-slate-50"

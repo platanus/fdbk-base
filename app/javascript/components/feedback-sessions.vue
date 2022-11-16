@@ -19,10 +19,14 @@ const tabClasses = {
     bg-gradient-to-b from-white via-white to-indigo-100`,
 };
 
+const loading = ref(false);
+
 async function switchType(type: 'provider' | 'receiver') {
   currentType.value = type;
+  loading.value = true;
   const res = await api.index(type);
   sessions.value = res.data.feedbackSessions;
+  loading.value = false;
 }
 </script>
 
@@ -45,12 +49,21 @@ async function switchType(type: 'provider' | 'receiver') {
       </button>
     </div>
     <div class="bg-slate-100 px-3 py-5">
-      <feedback-session-item
-        v-for="session in sessions"
-        :key="session.id"
-        :type="currentType"
-        :session="session"
-      />
+      <div
+        v-if="loading"
+        class="flex h-12 animate-pulse items-center justify-center bg-slate-50"
+      >
+        Cargando...
+      </div>
+      <template v-else>
+        <feedback-session-item
+          v-for="session in sessions"
+          :key="session.id"
+          class="mb-3"
+          :type="currentType"
+          :session="session"
+        />
+      </template>
     </div>
   </div>
 </template>

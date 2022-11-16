@@ -27,6 +27,18 @@ RSpec.describe 'Api::Internal::FeedbackSessionsControllers', type: :request do
       it { expect(response.status).to eq(200) }
     end
 
+    context 'with type param' do
+      let(:params) { { type: 'provider' } }
+
+      before do
+        sign_in(user)
+        perform
+      end
+
+      it { expect(collection.count).to eq(1) }
+      it { expect(response.status).to eq(200) }
+    end
+
     context 'with unauthenticated user' do
       before { perform }
 

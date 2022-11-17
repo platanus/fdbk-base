@@ -1,6 +1,7 @@
 import api from './index';
 
 export interface User {
+  id: number;
   email: string;
   name?: string;
 }

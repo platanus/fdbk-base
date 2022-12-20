@@ -119,6 +119,7 @@ jobs:
           name: Run jest
           command: |
             yarn run test > coverage/input_jest.txt
+            touch coverage/output_jest.txt
             ./node_modules/.bin/format-coverage coverage/input_jest.txt coverage/output_jest.txt /home/circleci/project/app/javascript
             cat coverage/output_jest.txt | ./bin/reviewdog -reporter=github-pr-review -efm="%f:%l:%c: %m"
 

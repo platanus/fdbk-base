@@ -1,6 +1,7 @@
 class FeedbackSession < ApplicationRecord
   belongs_to :provider, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
+  has_many :comments, dependent: :destroy
 
   scope :for_user, ->(user) { where(provider: user).or(where(receiver: user)) }
 

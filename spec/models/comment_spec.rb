@@ -7,6 +7,7 @@ RSpec.describe Comment, type: :model do
 
   describe 'Validations' do
     it { is_expected.to validate_presence_of(:feedback_session_id) }
+    it { is_expected.to validate_presence_of(:body) }
   end
 
   describe 'Associations' do

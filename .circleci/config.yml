@@ -81,7 +81,8 @@ jobs:
     executor: test-executor
     steps:
       - setup
-      - browser-tools/install-chrome
+      - browser-tools/install-chrome:
+          chrome-version: 114.0.5735.90
       - browser-tools/install-chromedriver
 
       - run:

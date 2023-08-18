@@ -78,7 +78,7 @@
     "webpack-dev-server": "^4.11.1"
   },
   "engines": {
-    "node": "14.x"
+    "node": "20.x"
   },
   "scripts": {
     "test": "jest --passWithNoTests",

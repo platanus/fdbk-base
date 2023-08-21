@@ -1,7 +1,7 @@
 class FeedbackSession < ApplicationRecord
   belongs_to :provider, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
-
+  has_many :comments
   scope :for_user, ->(user) { where(provider: user).or(where(receiver: user)) }
 
   validates :session_date, presence: true
@@ -17,9 +17,11 @@ end
 #  session_date :date
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  comment_id   :bigint(8)
 #
 # Indexes
 #
+#  index_feedback_sessions_on_comment_id   (comment_id)
 #  index_feedback_sessions_on_provider_id  (provider_id)
 #  index_feedback_sessions_on_receiver_id  (receiver_id)
 #

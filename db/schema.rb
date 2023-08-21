@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_10_180905) do
+ActiveRecord::Schema.define(version: 2023_08_21_165538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,12 +41,21 @@ ActiveRecord::Schema.define(version: 2022_11_10_180905) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.bigint "feedback_session_id"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "feedback_sessions", force: :cascade do |t|
     t.bigint "provider_id", null: false
     t.bigint "receiver_id", null: false
     t.date "session_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "comment_id"
+    t.index ["comment_id"], name: "index_feedback_sessions_on_comment_id"
     t.index ["provider_id"], name: "index_feedback_sessions_on_provider_id"
     t.index ["receiver_id"], name: "index_feedback_sessions_on_receiver_id"
   end
